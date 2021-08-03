@@ -6,12 +6,15 @@ window.title("Binary Number Search")
 window.geometry("400x400")
 
 times_played = 0
-    
+
 def gen_list():
     global generated_list
+    global label1
     generated_list = main.list_gen(20, 100, 1, 100)
+    label1.config(text=f"This program just generated a list of {len(generated_list)} random integers from {generated_list[0]} to {generated_list[-1]}.")
 
 gen_list()
+label1text = f"This program just generated a list of {len(generated_list)} random integers from {generated_list[0]} to {generated_list[-1]}."
 
 def execute(): 
     global user_response
@@ -33,8 +36,8 @@ def display_index():
 
 #label1 and label3 need to be repeated so they can continuously update.
 
-#label1 = tk.Label(text=f"This program just generated a list of {len(generated_list)} random integers from {generated_list[0]} to {generated_list[-1]}.")
-#label1.grid(column=0, row=0)
+label1 = tk.Label(text=f"This program just generated a list of {len(generated_list)} random integers from {generated_list[0]} to {generated_list[-1]}.")
+label1.grid(column=0, row=0)
 
 label2 = tk.Label(text="What number would you like to search for in the list?")
 label2.grid(column=0, row=1)
