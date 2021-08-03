@@ -57,6 +57,7 @@ def show_list():
     
 def button2_pressed():
     gen_list()
+    label3.config(text=f"You have searched for {times_played} numbers and generated {lists_generated} lists.")
     global lists_shown
     if lists_shown > 0: show_list()
 
