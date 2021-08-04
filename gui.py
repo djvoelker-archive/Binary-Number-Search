@@ -8,6 +8,7 @@ window.geometry("400x400")
 times_played = 0
 lists_generated = 0
 lists_shown = 0
+list_visible = "Show"
 
 label1 = tk.Label()
 label1.grid(column=0, row=0)
@@ -27,6 +28,12 @@ def gen_list():
 gen_list()
 
 label3.config(text=f"You have searched for {times_played} numbers and generated {lists_generated} lists.")
+
+def makelistdisplay():
+    global display2
+    display2 = tk.Text(master=window, width=30, height=10, exportselection=False, wrap="word")
+    display2.grid(column=0, row=8)
+    display2.insert(tk.END, generated_list)
 
 def execute(): 
     global user_response
@@ -50,16 +57,26 @@ def display_index():
 def show_list():
     global lists_shown
     global generated_list
-    display2 = tk.Text(master=window, width=30, height=10, exportselection=False, wrap="word")
-    display2.grid(column=0, row=8)
-    display2.insert(tk.END, generated_list)
+    global list_visible
+    global button3
+    if list_visible == "Show":
+        list_visible = "Hide"
+        makelistdisplay()
+    else:
+        list_visible = "Show"
+        display2.destroy()
+    button3.config(text=f"{list_visible} list")
     lists_shown += 1
     
 def button2_pressed():
+    global display2
     gen_list()
     label3.config(text=f"You have searched for {times_played} numbers and generated {lists_generated} lists.")
-    global lists_shown
-    if lists_shown > 0: show_list()
+    if list_visible == "Hide":
+        print(generated_list[0])
+        #for some reason you need to use "1.0" instead of 0 and "end" instead of len(generated_list)-1 for the indices.
+        display2.delete("1.0", "end")
+        display2.insert(tk.END, generated_list)
 
 label2 = tk.Label(text="What number would you like to search for in the list?")
 label2.grid(column=0, row=1)
@@ -73,7 +90,7 @@ button1.grid(column=0, row=3)
 button2 = tk.Button(text="Generate new list", command=button2_pressed)
 button2.grid(column=0, row=5)
 
-button3 = tk.Button(text="Show list", command=show_list)
+button3 = tk.Button(text=f"{list_visible} list", command=show_list)
 button3.grid(column=0, row=7)
 
 window.mainloop()
