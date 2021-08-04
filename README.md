@@ -1,3 +1,3 @@
 # Binary-Search-Guessing-Game
 
-Run gui.py for the game.
+Run main.py for the game.

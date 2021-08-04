@@ -1,5 +1,8 @@
 import tkinter as tk
-import main
+
+open("scripts.py")
+
+import scripts
 
 window = tk.Tk()
 window.title("Binary Number Search")
@@ -21,7 +24,7 @@ def gen_list():
     global generated_list
     global label1
     global lists_generated
-    generated_list = main.list_gen(20, 100, 1, 100)
+    generated_list = scripts.list_gen(20, 100, 1, 100)
     label1.config(text=f"This program just generated a list of {len(generated_list)} random integers from {generated_list[0]} to {generated_list[-1]}.")
     lists_generated += 1
 
@@ -41,12 +44,12 @@ def execute():
     global generated_list
     user_response = int(entry1.get())
     entry1.delete(0, len(entry1.get())+1)
-    num_index = main.search(generated_list, user_response)
+    num_index = scripts.search(generated_list, user_response)
 
 def display_index():
     global times_played
     execute()
-    answer = main.respond(num_index, user_response)
+    answer = scripts.respond(num_index, user_response)
     display = tk.Text(master=window, width=30, height=2, exportselection=False, wrap="word")
     display.grid(column=0, row=4)
     display.insert(tk.END, answer)
@@ -73,7 +76,6 @@ def button2_pressed():
     gen_list()
     label3.config(text=f"You have searched for {times_played} numbers and generated {lists_generated} lists.")
     if list_visible == "Hide":
-        print(generated_list[0])
         #for some reason you need to use "1.0" instead of 0 and "end" instead of len(generated_list)-1 for the indices.
         display2.delete("1.0", "end")
         display2.insert(tk.END, generated_list)
