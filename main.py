@@ -95,4 +95,6 @@ button2.grid(column=0, row=5)
 button3 = tk.Button(text=f"{list_visible} list", command=show_list)
 button3.grid(column=0, row=7)
 
+
+
 window.mainloop()
