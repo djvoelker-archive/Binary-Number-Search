@@ -31,7 +31,9 @@ from math import floor
 #generates a new list of unique integers of specified length and number range
 def list_gen(min_size, max_size, min_num, max_num):
     i = []
-    for x in range(randint(min_size, max_size)):
+    x = randint(min_size, max_size)
+    if max_num - min_num + 1 < x: x = max_num - min_num + 1
+    while len(set(i)) < x:
         i.append(randint(min_num, max_num))
     i = list(set(i))
     i.sort()
