@@ -1,5 +1,9 @@
 import tkinter as tk
 
+#
+#-----------start of the binary search algorithm-----------
+#
+
 from random import randint
 from math import floor
 
@@ -38,15 +42,20 @@ def respond(pos, num):
     else: i = str("The number " + str(num) + " is at position " + str(pos+1)+ " in the list.")
     return i
 
+#
+#-----------end of the binary search algorithm-----------
+#
+
 root = tk.Tk()
 root.title("Binary Number Search")
 root.geometry("600x400")
+root.configure(bg="gray11")
 
-window = tk.LabelFrame(root, bd=0)
+window = tk.LabelFrame(root, bd=0, bg="gray11")
 window.grid_columnconfigure
 
-base = tk.LabelFrame(window, bd=0)
-options = tk.LabelFrame(window, relief="sunken")
+base = tk.LabelFrame(window, bd=0, bg="gray11")
+options = tk.LabelFrame(window, relief="sunken", bg="gray11", bd=10)
 
 times_played = 0
 lists_generated = 0
@@ -152,7 +161,7 @@ def button2_pressed():
         display2.insert(tk.END, generated_list)
 
 
-#widgets in the base LabelFrame
+#widgets in the 'base' LabelFrame
 label1.grid(column=0, row=0)
 label2 = tk.Label(base, text="What number would you like to search for in the list?")
 label2.grid(column=0, row=1)
@@ -165,12 +174,12 @@ button2 = tk.Button(base, text="Generate new list", command=button2_pressed, rel
 button2.grid(column=0, row=5)
 button3 = tk.Button(base, text=f"{list_visible} list", command=show_list, relief="raised")
 button3.grid(column=0, row=7)
-pad1 = tk.Frame(base, width=450, bd=0)
-pad1.grid(column=0, row=9)
+padding1 = tk.Frame(base, width=450, bd=0, bg="gray11")
+padding1.grid(column=0, row=9)
 base.grid(column=0, row=0, sticky="n", padx=0, pady=0)
 
 
-#widgets in the options LabelFrame
+#widgets in the 'options' LabelFrame
 label4.grid(column=0, row=0)
 label5.grid(column=0, row=2)
 label6.grid(column=0, row=4)
@@ -180,6 +189,7 @@ max_num_scale.grid(column=0, row=3)
 min_list_size.grid(column=0, row=5)
 max_list_size.grid(column=0, row=7)
 options.grid(column=1, row=0, sticky="n")
+
 
 window.grid(column=0, row=0)
 
