@@ -7,6 +7,7 @@ import tkinter as tk
 from random import randint
 from math import floor
 
+
 #generates a new list of unique integers of specified length and number range
 def list_gen(min_size, max_size, min_num, max_num):
     i = []
@@ -49,13 +50,13 @@ def respond(pos, num):
 root = tk.Tk()
 root.title("Binary Number Search")
 root.geometry("600x400")
-root.configure(bg="gray11")
 
-window = tk.LabelFrame(root, bd=0, bg="gray11")
+
+window = tk.LabelFrame(root, bd=0)
 window.grid_columnconfigure
 
-base = tk.LabelFrame(window, bd=0, bg="gray11")
-options = tk.LabelFrame(window, relief="sunken", bg="gray11", bd=10)
+base = tk.LabelFrame(window, bd=0)
+options = tk.LabelFrame(window, relief="sunken", bd=5)
 
 times_played = 0
 lists_generated = 0
@@ -174,7 +175,7 @@ button2 = tk.Button(base, text="Generate new list", command=button2_pressed, rel
 button2.grid(column=0, row=5)
 button3 = tk.Button(base, text=f"{list_visible} list", command=show_list, relief="raised")
 button3.grid(column=0, row=7)
-padding1 = tk.Frame(base, width=450, bd=0, bg="gray11")
+padding1 = tk.Frame(base, width=450, bd=0)
 padding1.grid(column=0, row=9)
 base.grid(column=0, row=0, sticky="n", padx=0, pady=0)
 
