@@ -1,9 +1,42 @@
 import tkinter as tk
 
-#not sure if I need this
-#open("scripts.py")
+from random import randint
+from math import floor
 
-import scripts
+#generates a new list of unique integers of specified length and number range
+def list_gen(min_size, max_size, min_num, max_num):
+    i = []
+    x = randint(min_size, max_size)
+    if max_num - min_num + 1 < x: x = max_num - min_num + 1
+    while len(set(i)) < x:
+        i.append(randint(min_num, max_num))
+    i = list(set(i))
+    i.sort()
+    return i
+
+#uses binary search to search for x in list l and returns index of number if found in list
+def search(l, x):
+    bounds = [0, len(l)-1]  
+    done = False
+    while done == False:
+        if bounds[1]-bounds[0] > 1:
+            if l[floor(bounds[0]+(bounds[1]-bounds[0])/2)] > x: bounds[1] = floor(bounds[0]+(bounds[1]-bounds[0])/2)
+            elif l[floor(bounds[0]+(bounds[1]-bounds[0])/2)] < x: bounds[0] = floor(bounds[0]+(bounds[1]-bounds[0])/2)
+            else:
+                index = floor((bounds[0]+(bounds[1]-bounds[0])/2))
+                done = True
+        else:
+            if l[bounds[1]] == x: index = bounds[1]
+            elif l[bounds[0]] == x: index = bounds[0]
+            else: index = "none"
+            done = True
+    return index
+
+#returns whether given number was found and the index of the number in the list given
+def respond(pos, num):
+    if pos == "none": i = str("The number " + str(num) + " is not in the list.")
+    else: i = str("The number " + str(num) + " is at position " + str(pos+1)+ " in the list.")
+    return i
 
 root = tk.Tk()
 root.title("Binary Number Search")
@@ -59,7 +92,7 @@ def gen_list():
         errormessage2 = tk.Label(window, fg="red", text="ERROR: upper bound of values must be greater than lower bound of values!")
         errormessage2.grid(column=0, row=1)
     else:
-        generated_list = scripts.list_gen(min_list_size.get(), max_list_size.get(), min_num_scale.get(), max_num_scale.get())
+        generated_list = list_gen(min_list_size.get(), max_list_size.get(), min_num_scale.get(), max_num_scale.get())
         label1.config(text=f"This program just randomly generated a list of {len(generated_list)} unique integers from {generated_list[0]} to {generated_list[-1]}.")
         lists_generated += 1
 
@@ -80,13 +113,13 @@ def execute():
     global generated_list
     user_response = int(entry1.get())
     entry1.delete(0, len(entry1.get())+1)
-    num_index = scripts.search(generated_list, user_response)
+    num_index = search(generated_list, user_response)
 
 def display_index():
     global times_played
     try:
         execute()
-        answer = scripts.respond(num_index, user_response)
+        answer = respond(num_index, user_response)
         display = tk.Text(master=base, width=30, height=2, exportselection=False, wrap="word")
         display.grid(column=0, row=4)
         display.insert(tk.END, answer)
