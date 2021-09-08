@@ -8,3 +8,4 @@ The numbers generated in the list are between the lower and upper bound of value
 but will not necessarily include those values.
 
 This is my first Python project. It is made using the tkinter and random libraries in Python.
+This project is not perfect as it is my first one. For example, I used too many global variables.
